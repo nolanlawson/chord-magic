@@ -132,6 +132,55 @@ function tests() {
       testRegex("Mi", new Chord('E', 'Major', null, null, null, null), 'SouthernEuropean');
       testRegex("Fa", new Chord('F', 'Major', null, null, null, null), 'SouthernEuropean');
     });
+
+    it('transposes', function () {
+
+      function testTranspose(input, num, output) {
+        chordParser.parse(input).transpose(num).toJSON().should.equal(
+          chordParser.parse(output).toJSON());
+      }
+      testTranspose('G', 2, 'A');
+      testTranspose('G7', 2, 'A7');
+      testTranspose('A', -2, 'G');
+      testTranspose('A7', 2, 'B7');
+      testTranspose('G#', 2, 'Bb');
+      testTranspose('A', 1, 'Bb');
+      testTranspose('A', 12, 'A');
+      testTranspose('G/F', 2, 'A/G');
+      testTranspose('G/F', 14, 'A/G');
+      testTranspose('G/F', -10, 'A/G');
+      testTranspose('Bb/A', 0, 'Bb/A');
+
+      testTranspose('Amaj7', 1, 'A#maj7');
+      testTranspose('Amaj7', 1, 'Bbmaj7');
+      testTranspose('Amaj7', 2, 'Bmaj7');
+      testTranspose('Amaj7', 3, 'Cmaj7');
+      testTranspose('Amaj7', 4, 'C#maj7');
+      testTranspose('Amaj7', 5, 'Dmaj7');
+      testTranspose('Amaj7', 6, 'D#maj7');
+      testTranspose('Amaj7', 6, 'Ebmaj7');
+      testTranspose('Amaj7', 7, 'Emaj7');
+      testTranspose('Amaj7', 8, 'Fmaj7');
+      testTranspose('Amaj7', 9, 'F#maj7');
+      testTranspose('Amaj7', 9, 'Gbmaj7');
+      testTranspose('Amaj7', 10, 'Gmaj7');
+      testTranspose('Amaj7', 11, 'G#maj7');
+
+      testTranspose('Amaj7', -11, 'A#maj7');
+      testTranspose('Amaj7', -11, 'Bbmaj7');
+      testTranspose('Amaj7', -10, 'Bmaj7');
+      testTranspose('Amaj7', -9, 'Cmaj7');
+      testTranspose('Amaj7', -8, 'C#maj7');
+      testTranspose('Amaj7', -7, 'Dmaj7');
+      testTranspose('Amaj7', -6, 'D#maj7');
+      testTranspose('Amaj7', -6, 'Ebmaj7');
+      testTranspose('Amaj7', -5, 'Emaj7');
+      testTranspose('Amaj7', -4, 'Fmaj7');
+      testTranspose('Amaj7', -3, 'F#maj7');
+      testTranspose('Amaj7', -3, 'Gbmaj7');
+      testTranspose('Amaj7', -2, 'Gmaj7');
+      testTranspose('Amaj7', -1, 'G#maj7');
+    });
   });
 }
 

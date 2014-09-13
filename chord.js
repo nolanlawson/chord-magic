@@ -1,5 +1,7 @@
 'use strict';
 
+var transpose = require('./transpose');
+
 function Chord(root, quality, extended, added, suspended, overridingRoot) {
   this.root = root;
   this.quality = quality;
@@ -33,6 +35,14 @@ Chord.prototype.toJSON = function () {
     res.overridingRoot = this.overridingRoot;
   }
   return JSON.stringify(res);
+};
+
+Chord.prototype.clone = function () {
+  return Chord.fromJSON(this.toJSON());
+};
+
+Chord.prototype.transpose = function (num) {
+  return transpose(this, num);
 };
 
 module.exports = Chord;
