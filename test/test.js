@@ -4,8 +4,9 @@
 var chai = require('chai');
 chai.use(require("chai-as-promised"));
 
-var chordParser = require('../');
-var Chord = require('../chord');
+var chordMagic = require('../lib');
+var parse = chordMagic.parse;
+var Chord = chordMagic.Chord;
 
 //
 // more variables you might want
@@ -16,7 +17,7 @@ function testRegex(name, chord, noteNaming) {
   var opts = {
     naming: noteNaming || 'English'
   };
-  var actual = chordParser.parse(name, opts).toJSON();
+  var actual = parse(name, opts).toJSON();
   var expected = chord.toJSON();
   actual.should.deep.equal(expected);
 }
@@ -88,7 +89,7 @@ function tests() {
     it('should serialize to/from json', function () {
 
       lotsaChords.forEach(function (stringChord) {
-        var chord = chordParser.parse(stringChord);
+        var chord = parse(stringChord);
 
         var asJson = chord.toJSON();
 
@@ -136,8 +137,8 @@ function tests() {
     it('transposes', function () {
 
       function testTranspose(input, num, output) {
-        chordParser.parse(input).transpose(num).toJSON().should.equal(
-          chordParser.parse(output).toJSON());
+        parse(input).transpose(num).toJSON().should.equal(
+          parse(output).toJSON());
       }
       testTranspose('G', 2, 'A');
       testTranspose('G7', 2, 'A7');

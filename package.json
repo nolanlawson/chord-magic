@@ -2,7 +2,7 @@
   "name": "chord-parser",
   "version": "1.0.1",
   "description": "Regex-based musical chord parser",
-  "main": "index.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/nolanlawson/chord-parser.git"
@@ -21,7 +21,7 @@
   "homepage": "https://github.com/nolanlawson/chord-parser",
   "scripts": {
     "test": "npm run jshint && npm run test-node",
-    "jshint": "jshint -c .jshintrc *.js test/test.js",
+    "jshint": "jshint -c .jshintrc lib/*.js test/*.js",
     "test-node": "istanbul test ./node_modules/mocha/bin/_mocha test/test.js",
     "coverage": "npm test --coverage && istanbul check-coverage --lines 100 --function 100 --statements 100 --branches 100",
     "build": "mkdir -p dist && browserify index.js -s chord-parser -o dist/chord-parser.js && npm run min",
