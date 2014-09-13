@@ -12,8 +12,11 @@ var Chord = require('../chord');
 //
 var should = chai.should(); // var should = chai.should();
 
-function testRegex(name, chord) {
-  var actual = chordParser.parse(name).toJSON();
+function testRegex(name, chord, noteNaming) {
+  var opts = {
+    naming: noteNaming || 'English'
+  };
+  var actual = chordParser.parse(name, opts).toJSON();
   var expected = chord.toJSON();
   actual.should.deep.equal(expected);
 }
@@ -93,7 +96,6 @@ function tests() {
 
         var fullCircle = fromJson.toJSON();
 
-
         asJson.should.equal(fullCircle);
 
         var fields = ['root', 'quality', 'extended', 'suspended', 'added', 'overridingRoot'];
@@ -106,6 +108,29 @@ function tests() {
           }
         });
       });
+    });
+
+    it('does English note names', function () {
+
+      testRegex("C", new Chord('C', 'Major', null, null, null, null), 'English');
+      testRegex("D", new Chord('D', 'Major', null, null, null, null), 'English');
+      testRegex("E", new Chord('E', 'Major', null, null, null, null), 'English');
+      testRegex("F", new Chord('F', 'Major', null, null, null, null), 'English');
+
+    });
+
+    it('does Northern European note names', function () {
+      testRegex("B", new Chord('Bb', 'Major', null, null, null, null), 'NorthernEuropean');
+      testRegex("C", new Chord('C', 'Major', null, null, null, null), 'NorthernEuropean');
+      testRegex("H", new Chord('B', 'Major', null, null, null, null), 'NorthernEuropean');
+      testRegex("F", new Chord('F', 'Major', null, null, null, null), 'NorthernEuropean');
+    });
+
+    it('does Southern European note names', function () {
+      testRegex("Do", new Chord('C', 'Major', null, null, null, null), 'SouthernEuropean');
+      testRegex("Re", new Chord('D', 'Major', null, null, null, null), 'SouthernEuropean');
+      testRegex("Mi", new Chord('E', 'Major', null, null, null, null), 'SouthernEuropean');
+      testRegex("Fa", new Chord('F', 'Major', null, null, null, null), 'SouthernEuropean');
     });
   });
 }
