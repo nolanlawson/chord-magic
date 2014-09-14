@@ -97,9 +97,9 @@ chordMagic.parse('C/G')
 // { root: 'C', quality: 'Major', overridingRoot: 'G' }
 ```
 
-This object has six possible fields:
+This object has six possible fields `root`, `quality`, `extended`, `suspended`, `added`, and `overridingRoot`:
 
-**`root`** *(required)*
+**root** *(required)*
 
 The root note of the chord. It will be one of:
 
@@ -120,7 +120,7 @@ The root note of the chord. It will be one of:
 ]
 ```
 
-**`quality`** *(required)*
+**quality** *(required)*
 
 The [chord quality](http://en.wikipedia.org/wiki/Major_and_minor). It will be one of:
 
@@ -133,7 +133,7 @@ The [chord quality](http://en.wikipedia.org/wiki/Major_and_minor). It will be on
 ]
 ```
 
-**`extended`**
+**extended**
 
 If the chord is [extended](http://en.wikipedia.org/wiki/Augmentation_(music)), then that will be expressed here. One of:
 
@@ -152,7 +152,7 @@ If the chord is [extended](http://en.wikipedia.org/wiki/Augmentation_(music)), t
 ]
 ```
 
-**`suspended`**
+**suspended**
 
 If the chord is [suspended](http://en.wikipedia.org/wiki/Nonchord_tone#Suspension), then that will be expressed here. One of:
 
@@ -163,7 +163,7 @@ If the chord is [suspended](http://en.wikipedia.org/wiki/Nonchord_tone#Suspensio
 ]
 ```
 
-**`added`**
+**added**
 
 If the chord has an [added note](http://en.wikipedia.org/wiki/Added_tone_chord), then that will be expressed here. One of:
 
@@ -179,7 +179,7 @@ If the chord has an [added note](http://en.wikipedia.org/wiki/Added_tone_chord),
 
 The `'PowerChord'` is also known as an `'Add5'`, but I thought it was funny to call it a `'PowerChord'`.
 
-**`overridingRoot`**
+**overridingRoot**
 
 If the chord has a note that overrides the root note (e.g. `'D/F#'`, where F# overrides D), then that will be expressed here. The `overridingRoot` can be any of the 12 notes listed above for the `root`.
 
