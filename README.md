@@ -104,20 +104,7 @@ This object has six possible fields `root`, `quality`, `extended`, `suspended`, 
 The root note of the chord. It will be one of:
 
 ```js
-[
-  'A',
-  'Bb',
-  'B',
-  'C',
-  'Db',
-  'D',
-  'Eb',
-  'E',
-  'F',
-  'Gb',
-  'G',
-  'Ab'
-]
+[ 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab' ]
 ```
 
 **quality** *(required)*
@@ -125,12 +112,7 @@ The root note of the chord. It will be one of:
 The [chord quality](http://en.wikipedia.org/wiki/Major_and_minor). It will be one of:
 
 ```js
-[
-  'Major',
-  'Minor',
-  'Augmented',
-  'Diminished'
-]
+[ 'Major', 'Minor', 'Augmented', 'Diminished' ]
 ```
 
 **extended**
@@ -157,10 +139,7 @@ If the chord is [extended](http://en.wikipedia.org/wiki/Augmentation_(music)), t
 If the chord is [suspended](http://en.wikipedia.org/wiki/Nonchord_tone#Suspension), then that will be expressed here. One of:
 
 ```js
-[
-  'Sus4',
-  'Sus2'
-]
+[ 'Sus4', 'Sus2' ]
 ```
 
 **added**
@@ -168,13 +147,7 @@ If the chord is [suspended](http://en.wikipedia.org/wiki/Nonchord_tone#Suspensio
 If the chord has an [added note](http://en.wikipedia.org/wiki/Added_tone_chord), then that will be expressed here. One of:
 
 ```js
-[
-  'Add9',
-  'Add11',
-  'Major6',
-  'SixNine',
-  'PowerChord'
-]
+[ 'Add9', 'Add11', 'Major6', 'SixNine', 'PowerChord' ]
 ```
 
 The `'PowerChord'` is also known as an `'Add5'`, but I thought it was funny to call it a `'PowerChord'`.
