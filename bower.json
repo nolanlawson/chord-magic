@@ -1,0 +1,28 @@
+{
+  "name": "chord-parser",
+  "version": "1.0.0",
+  "homepage": "https://github.com/nolanlawson/chord-magic",
+  "authors": [
+    "Nolan Lawson <nolan.lawson@gmail.com>"
+  ],
+  "description": "Musical chord parser, transposer, and disambiguator",
+  "main": "dist/chord-magic.js",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "chord",
+    "parse",
+    "music",
+    "parser",
+    "magic"
+  ],
+  "license": "Apache",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
