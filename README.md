@@ -225,3 +225,18 @@ chordMagic.prettyPrint(chordMagic.parse('Cmaj7'))
 ```
 
 Currently this will just choose a single representation for each note (e.g. always `'Bb'` and never `'A#'`) as well as a single common representation for every other attribute (e.g. always `'m7'`, never `'min7'`, `'minor7'`, etc.).
+
+Build this project
+-------
+
+    $ npm run build
+
+
+Test this project
+-------
+
+    $ npm run test
+
+Or to check code coverage:
+
+    $ npm run coverage
