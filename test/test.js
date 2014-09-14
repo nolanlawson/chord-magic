@@ -182,6 +182,75 @@ function tests() {
       testTranspose('Amaj7', -2, 'Gmaj7');
       testTranspose('Amaj7', -1, 'G#maj7');
     });
+
+    it('should pretty print', function () {
+      parse('Amaj7').prettyPrint().should.equal('Amaj7');
+      parse('AMaj7').prettyPrint().should.equal('Amaj7');
+      parse('AM7').prettyPrint().should.equal('Amaj7');
+      parse('A7').prettyPrint().should.equal('A7');
+      parse('A').prettyPrint().should.equal('A');
+
+      parse('A#maj7').prettyPrint().should.equal('Bbmaj7');
+      parse('A#Maj7').prettyPrint().should.equal('Bbmaj7');
+      parse('A#M7').prettyPrint().should.equal('Bbmaj7');
+      parse('A#7').prettyPrint().should.equal('Bb7');
+      parse('A#').prettyPrint().should.equal('Bb');
+
+      parse('Lamaj7', {naming: 'SouthernEuropean'}).prettyPrint().should.equal('Amaj7');
+      parse('LaMaj7', {naming: 'SouthernEuropean'}).prettyPrint().should.equal('Amaj7');
+      parse('LaM7', {naming: 'SouthernEuropean'}).prettyPrint().should.equal('Amaj7');
+      parse('La7', {naming: 'SouthernEuropean'}).prettyPrint().should.equal('A7');
+      parse('La', {naming: 'SouthernEuropean'}).prettyPrint().should.equal('A');
+
+      parse('Amaj7').prettyPrint({naming: 'SouthernEuropean'}).should.equal('Lamaj7');
+      parse('AMaj7').prettyPrint({naming: 'SouthernEuropean'}).should.equal('Lamaj7');
+      parse('AM7').prettyPrint({naming: 'SouthernEuropean'}).should.equal('Lamaj7');
+      parse('A7').prettyPrint({naming: 'SouthernEuropean'}).should.equal('La7');
+      parse('A').prettyPrint({naming: 'SouthernEuropean'}).should.equal('La');
+
+      // TODO: all of these defaults may change in the future, depending on
+      // what we think is the most "common" representation
+      parse('Cmaj7').prettyPrint().should.equal('Cmaj7');
+      parse('C#maj7').prettyPrint().should.equal('Dbmaj7');
+      parse('Amaj7').prettyPrint().should.equal('Amaj7');
+      parse('A#maj7').prettyPrint().should.equal('Bbmaj7');
+      parse('Dmaj7').prettyPrint().should.equal('Dmaj7');
+      parse('Gmaj7').prettyPrint().should.equal('Gmaj7');
+      parse('Gadd9').prettyPrint().should.equal('Gadd9');
+      parse('Gadd11').prettyPrint().should.equal('Gadd11');
+      parse('Abadd9').prettyPrint().should.equal('Abadd9');
+      parse('Abminadd9').prettyPrint().should.equal('Abmadd9');
+      parse('Gsus4').prettyPrint().should.equal('Gsus4');
+      parse('G#sus').prettyPrint().should.equal('Absus4');
+      parse('Absus2').prettyPrint().should.equal('Absus2');
+      parse('Asus4').prettyPrint().should.equal('Asus4');
+      parse('G/F').prettyPrint().should.equal('G/F');
+      parse('G#/Bb').prettyPrint().should.equal('Ab/Bb');
+      parse('C/D').prettyPrint().should.equal('C/D');
+      parse('C7').prettyPrint().should.equal('C7');
+      parse('D#7').prettyPrint().should.equal('Eb7');
+      parse('D#maj7').prettyPrint().should.equal('Ebmaj7');
+      parse('D#m7').prettyPrint().should.equal('Ebm7');
+      parse('D#min7').prettyPrint().should.equal('Ebm7');
+      parse('D#M7').prettyPrint().should.equal('Ebmaj7');
+      parse('C').prettyPrint().should.equal('C');
+      parse('CM').prettyPrint().should.equal('C');
+      parse('Cm').prettyPrint().should.equal('Cm');
+      parse('C2').prettyPrint().should.equal('Cadd9');
+      parse('C4').prettyPrint().should.equal('Cadd11');
+      parse('C9').prettyPrint().should.equal('Cmaj9');
+      parse('C11').prettyPrint().should.equal('Cmaj11');
+      parse('C13').prettyPrint().should.equal('Cmaj13');
+      parse('Am9').prettyPrint().should.equal('Amin9');
+      parse('C6').prettyPrint().should.equal('C6');
+      parse('C5').prettyPrint().should.equal('C5');
+      parse('D5').prettyPrint().should.equal('D5');
+      parse('Eb5').prettyPrint().should.equal('Eb5');
+      parse('GMaj7').prettyPrint().should.equal('Gmaj7');
+      parse('GM7').prettyPrint().should.equal('Gmaj7');
+      parse('Gmaj7').prettyPrint().should.equal('Gmaj7');
+
+    });
   });
 }
 
