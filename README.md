@@ -107,7 +107,7 @@ The root note of the chord. It will be one of:
 [ 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab' ]
 ```
 
-Note that is value is always in English format, regardless of the format when you parsed it.
+Note that is value is always in English format, regardless of the format when you parsed it. Also, flats are always expressed, never sharps (e.g. always `'Bb'`, never `'A#'`). The goal here is that you never have to do the disambiguation yourself.
 
 **quality** *(required)*
 
