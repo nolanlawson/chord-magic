@@ -1,31 +1,32 @@
 {
-  "name": "chord-parser",
-  "version": "1.0.1",
-  "description": "Regex-based musical chord parser",
+  "name": "chord-magic",
+  "version": "1.0.0",
+  "description": "Musical chord parser, transposer, and disambiguator",
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nolanlawson/chord-parser.git"
+    "url": "https://github.com/nolanlawson/chord-magic.git"
   },
   "keywords": [
     "chord",
     "parse",
     "music",
-    "parser"
+    "parser",
+    "magic"
   ],
   "author": "Nolan Lawson <nolan.lawson@gmail.com>",
   "license": "Apache 2",
   "bugs": {
-    "url": "https://github.com/nolanlawson/chord-parser/issues"
+    "url": "https://github.com/nolanlawson/chord-magic/issues"
   },
-  "homepage": "https://github.com/nolanlawson/chord-parser",
+  "homepage": "https://github.com/nolanlawson/chord-magic",
   "scripts": {
     "test": "npm run jshint && npm run test-node",
     "jshint": "jshint -c .jshintrc lib/*.js test/*.js",
     "test-node": "istanbul test ./node_modules/mocha/bin/_mocha test/test.js",
     "coverage": "npm test --coverage && istanbul check-coverage --lines 100 --function 100 --statements 100 --branches 100",
-    "build": "mkdir -p dist && browserify index.js -s chord-parser -o dist/chord-parser.js && npm run min",
-    "min": "uglifyjs dist/chord-parser.js -mc > dist/chord-parser.min.js"
+    "build": "mkdir -p dist && browserify index.js -s chordMagic -o dist/chord-magic.js && npm run min",
+    "min": "uglifyjs dist/chord-magic.js -mc > dist/chord-magic.min.js"
   },
   "devDependencies": {
     "browserify": "~2.36.0",
