@@ -1,6 +1,8 @@
 Chord Magic
 ==========
 
+[![Build Status](https://travis-ci.org/nolanlawson/chord-magic.svg)](https://travis-ci.org/nolanlawson/chord-magic)
+
 Chord Magic is a parser, disambiguator, transposer, and pretty-printer for musical chords. It runs in Node.js and the browser.
 
 ```js
