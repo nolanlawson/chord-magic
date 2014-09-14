@@ -14,34 +14,6 @@ var transpose = chordMagic.transpose;
 //
 chai.should(); // var should = chai.should();
 
-function testRegex(name, chord, noteNaming) {
-  var opts = {
-    naming: noteNaming || 'English'
-  };
-  var actual = parse(name, opts);
-  actual.should.deep.equal(chord);
-}
-
-function makeChord(root, quality, extended, added, suspended, overridingRoot) {
-  var res = {root: root};
-  if (quality) {
-    res.quality = quality;
-  }
-  if (extended) {
-    res.extended = extended;
-  }
-  if (added) {
-    res.added = added;
-  }
-  if (suspended) {
-    res.suspended = suspended;
-  }
-  if (overridingRoot) {
-    res.overridingRoot = overridingRoot;
-  }
-  return res;
-}
-
 function tests() {
 
   // this is like some White Album B-side shit right here
@@ -256,6 +228,34 @@ function tests() {
 
     });
   });
+}
+
+function testRegex(name, chord, noteNaming) {
+  var opts = {
+    naming: noteNaming || 'English'
+  };
+  var actual = parse(name, opts);
+  actual.should.deep.equal(chord);
+}
+
+function makeChord(root, quality, extended, added, suspended, overridingRoot) {
+  var res = {root: root};
+  if (quality) {
+    res.quality = quality;
+  }
+  if (extended) {
+    res.extended = extended;
+  }
+  if (added) {
+    res.added = added;
+  }
+  if (suspended) {
+    res.suspended = suspended;
+  }
+  if (overridingRoot) {
+    res.overridingRoot = overridingRoot;
+  }
+  return res;
 }
 
 tests();
