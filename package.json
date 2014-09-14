@@ -25,7 +25,7 @@
     "jshint": "jshint -c .jshintrc lib/*.js test/*.js",
     "test-node": "istanbul test ./node_modules/mocha/bin/_mocha test/test.js",
     "coverage": "npm test --coverage && istanbul check-coverage --lines 100 --function 100 --statements 100 --branches 100",
-    "build": "mkdir -p dist && browserify index.js -s chordMagic -o dist/chord-magic.js && npm run min",
+    "build": "mkdir -p dist && browserify lib/index.js -s chordMagic -o dist/chord-magic.js && npm run min",
     "min": "uglifyjs dist/chord-magic.js -mc > dist/chord-magic.min.js"
   },
   "devDependencies": {
