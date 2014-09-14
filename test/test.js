@@ -6,20 +6,40 @@ chai.use(require("chai-as-promised"));
 
 var chordMagic = require('../lib');
 var parse = chordMagic.parse;
-var Chord = chordMagic.Chord;
+var prettyPrint = chordMagic.prettyPrint;
+var transpose = chordMagic.transpose;
 
 //
 // more variables you might want
 //
-var should = chai.should(); // var should = chai.should();
+chai.should(); // var should = chai.should();
 
 function testRegex(name, chord, noteNaming) {
   var opts = {
     naming: noteNaming || 'English'
   };
-  var actual = parse(name, opts).toJSON();
-  var expected = chord.toJSON();
-  actual.should.deep.equal(expected);
+  var actual = parse(name, opts);
+  actual.should.deep.equal(chord);
+}
+
+function makeChord(root, quality, extended, added, suspended, overridingRoot) {
+  var res = {root: root};
+  if (quality) {
+    res.quality = quality;
+  }
+  if (extended) {
+    res.extended = extended;
+  }
+  if (added) {
+    res.added = added;
+  }
+  if (suspended) {
+    res.suspended = suspended;
+  }
+  if (overridingRoot) {
+    res.overridingRoot = overridingRoot;
+  }
+  return res;
 }
 
 function tests() {
@@ -34,111 +54,95 @@ function tests() {
 
     it('should pass the original java tests', function () {
 
-      testRegex("Cmaj7", new Chord('C', 'Major', 'Major7', null, null, null));
-      testRegex("C#maj7", new Chord('Db', 'Major', 'Major7', null, null, null));
-      testRegex("Amaj7", new Chord('A', 'Major', 'Major7', null, null, null));
-      testRegex("A#maj7", new Chord('Bb', 'Major', 'Major7', null, null, null));
-      testRegex("Dmaj7", new Chord('D', 'Major', 'Major7', null, null, null));
-      testRegex("Gmaj7", new Chord('G', 'Major', 'Major7', null, null, null));
+      testRegex("Cmaj7", makeChord('C', 'Major', 'Major7', null, null, null));
+      testRegex("C#maj7", makeChord('Db', 'Major', 'Major7', null, null, null));
+      testRegex("Amaj7", makeChord('A', 'Major', 'Major7', null, null, null));
+      testRegex("A#maj7", makeChord('Bb', 'Major', 'Major7', null, null, null));
+      testRegex("Dmaj7", makeChord('D', 'Major', 'Major7', null, null, null));
+      testRegex("Gmaj7", makeChord('G', 'Major', 'Major7', null, null, null));
 
-      testRegex("Gadd9", new Chord('G', 'Major', null, 'Add9', null, null));
-      testRegex("Gadd11", new Chord('G', 'Major', null, 'Add11', null, null));
-      testRegex("Abadd9", new Chord('Ab', 'Major', null, 'Add9', null, null));
-      testRegex("Abminadd9", new Chord('Ab', 'Minor', null, 'Add9', null, null));
+      testRegex("Gadd9", makeChord('G', 'Major', null, 'Add9', null, null));
+      testRegex("Gadd11", makeChord('G', 'Major', null, 'Add11', null, null));
+      testRegex("Abadd9", makeChord('Ab', 'Major', null, 'Add9', null, null));
+      testRegex("Abminadd9", makeChord('Ab', 'Minor', null, 'Add9', null, null));
 
-      testRegex("Gsus4", new Chord('G', 'Major', null, null, 'Sus4', null));
-      testRegex("G#sus", new Chord('Ab', 'Major', null, null, 'Sus4', null));
-      testRegex("Absus2", new Chord('Ab', 'Major', null, null, 'Sus2', null));
-      testRegex("Asus4", new Chord('A', 'Major', null, null, 'Sus4', null));
+      testRegex("Gsus4", makeChord('G', 'Major', null, null, 'Sus4', null));
+      testRegex("G#sus", makeChord('Ab', 'Major', null, null, 'Sus4', null));
+      testRegex("Absus2", makeChord('Ab', 'Major', null, null, 'Sus2', null));
+      testRegex("Asus4", makeChord('A', 'Major', null, null, 'Sus4', null));
 
-      testRegex("G/F", new Chord('G', 'Major', null, null, null, 'F'));
-      testRegex("G#/Bb", new Chord('Ab', 'Major', null, null, null, 'Bb'));
-      testRegex("C/D", new Chord('C', 'Major', null, null, null, 'D'));
+      testRegex("G/F", makeChord('G', 'Major', null, null, null, 'F'));
+      testRegex("G#/Bb", makeChord('Ab', 'Major', null, null, null, 'Bb'));
+      testRegex("C/D", makeChord('C', 'Major', null, null, null, 'D'));
 
-      testRegex("C7", new Chord('C', 'Major', 'Dominant7', null, null, null));
-      testRegex("D#7", new Chord('Eb', 'Major', 'Dominant7', null, null, null));
-      testRegex("D#maj7", new Chord('Eb', 'Major', 'Major7', null, null, null));
-      testRegex("D#m7", new Chord('Eb', 'Minor', 'Minor7', null, null, null));
-      testRegex("D#min7", new Chord('Eb', 'Minor', 'Minor7', null, null, null));
-      testRegex("D#M7", new Chord('Eb', 'Major', 'Major7', null, null, null));
+      testRegex("C7", makeChord('C', 'Major', 'Dominant7', null, null, null));
+      testRegex("D#7", makeChord('Eb', 'Major', 'Dominant7', null, null, null));
+      testRegex("D#maj7", makeChord('Eb', 'Major', 'Major7', null, null, null));
+      testRegex("D#m7", makeChord('Eb', 'Minor', 'Minor7', null, null, null));
+      testRegex("D#min7", makeChord('Eb', 'Minor', 'Minor7', null, null, null));
+      testRegex("D#M7", makeChord('Eb', 'Major', 'Major7', null, null, null));
 
-      testRegex("C", new Chord('C', 'Major', null, null, null, null));
-      testRegex("CM", new Chord('C', 'Major', null, null, null, null));
-      testRegex("Cm", new Chord('C', 'Minor', null, null, null, null));
+      testRegex("C", makeChord('C', 'Major', null, null, null, null));
+      testRegex("CM", makeChord('C', 'Major', null, null, null, null));
+      testRegex("Cm", makeChord('C', 'Minor', null, null, null, null));
 
-      testRegex("C2", new Chord('C', 'Major', null, 'Add9', null, null));
-      testRegex("C4", new Chord('C', 'Major', null, 'Add11', null, null));
+      testRegex("C2", makeChord('C', 'Major', null, 'Add9', null, null));
+      testRegex("C4", makeChord('C', 'Major', null, 'Add11', null, null));
 
-      testRegex("C9", new Chord('C', 'Major', 'Major9', null, null, null));
-      testRegex("C11", new Chord('C', 'Major', 'Major11', null, null, null));
-      testRegex("C13", new Chord('C', 'Major', 'Major13', null, null, null));
+      testRegex("C9", makeChord('C', 'Major', 'Major9', null, null, null));
+      testRegex("C11", makeChord('C', 'Major', 'Major11', null, null, null));
+      testRegex("C13", makeChord('C', 'Major', 'Major13', null, null, null));
 
-      testRegex("Am9", new Chord('A', 'Minor', 'Minor9', null, null, null));
-      testRegex("C6", new Chord('C', 'Major', null, 'Major6', null, null));
+      testRegex("Am9", makeChord('A', 'Minor', 'Minor9', null, null, null));
+      testRegex("C6", makeChord('C', 'Major', null, 'Major6', null, null));
 
-      testRegex("C5", new Chord('C', 'Major', null, 'PowerChord', null, null));
-      testRegex("D5", new Chord('D', 'Major', null, 'PowerChord', null, null));
-      testRegex("Eb5", new Chord('Eb', 'Major', null, 'PowerChord', null, null));
+      testRegex("C5", makeChord('C', 'Major', null, 'PowerChord', null, null));
+      testRegex("D5", makeChord('D', 'Major', null, 'PowerChord', null, null));
+      testRegex("Eb5", makeChord('Eb', 'Major', null, 'PowerChord', null, null));
 
-      testRegex("GMaj7", new Chord('G', 'Major', 'Major7', null, null, null));
-      testRegex("GM7", new Chord('G', 'Major', 'Major7', null, null, null));
-      testRegex("Gmaj7", new Chord('G', 'Major', 'Major7', null, null, null));
+      testRegex("GMaj7", makeChord('G', 'Major', 'Major7', null, null, null));
+      testRegex("GM7", makeChord('G', 'Major', 'Major7', null, null, null));
+      testRegex("Gmaj7", makeChord('G', 'Major', 'Major7', null, null, null));
 
     });
 
-    it('should serialize to/from json', function () {
+    it('should be commutative', function () {
 
       lotsaChords.forEach(function (stringChord) {
         var chord = parse(stringChord);
+        var otherChord = parse(prettyPrint(chord));
 
-        var asJson = chord.toJSON();
-
-        var fromJson = Chord.fromJSON(asJson);
-
-        var fullCircle = fromJson.toJSON();
-
-        asJson.should.equal(fullCircle);
-
-        var fields = ['root', 'quality', 'extended', 'suspended', 'added', 'overridingRoot'];
-
-        fields.forEach(function (field) {
-          if (chord[field]) {
-            chord[field].should.equal(fromJson[field]);
-          } else { // undefined
-            should.not.exist(fromJson[field]);
-          }
-        });
+        chord.should.deep.equal(otherChord);
       });
     });
 
     it('does English note names', function () {
 
-      testRegex("C", new Chord('C', 'Major', null, null, null, null), 'English');
-      testRegex("D", new Chord('D', 'Major', null, null, null, null), 'English');
-      testRegex("E", new Chord('E', 'Major', null, null, null, null), 'English');
-      testRegex("F", new Chord('F', 'Major', null, null, null, null), 'English');
+      testRegex("C", makeChord('C', 'Major', null, null, null, null), 'English');
+      testRegex("D", makeChord('D', 'Major', null, null, null, null), 'English');
+      testRegex("E", makeChord('E', 'Major', null, null, null, null), 'English');
+      testRegex("F", makeChord('F', 'Major', null, null, null, null), 'English');
 
     });
 
     it('does Northern European note names', function () {
-      testRegex("B", new Chord('Bb', 'Major', null, null, null, null), 'NorthernEuropean');
-      testRegex("C", new Chord('C', 'Major', null, null, null, null), 'NorthernEuropean');
-      testRegex("H", new Chord('B', 'Major', null, null, null, null), 'NorthernEuropean');
-      testRegex("F", new Chord('F', 'Major', null, null, null, null), 'NorthernEuropean');
+      testRegex("B", makeChord('Bb', 'Major', null, null, null, null), 'NorthernEuropean');
+      testRegex("C", makeChord('C', 'Major', null, null, null, null), 'NorthernEuropean');
+      testRegex("H", makeChord('B', 'Major', null, null, null, null), 'NorthernEuropean');
+      testRegex("F", makeChord('F', 'Major', null, null, null, null), 'NorthernEuropean');
     });
 
     it('does Southern European note names', function () {
-      testRegex("Do", new Chord('C', 'Major', null, null, null, null), 'SouthernEuropean');
-      testRegex("Re", new Chord('D', 'Major', null, null, null, null), 'SouthernEuropean');
-      testRegex("Mi", new Chord('E', 'Major', null, null, null, null), 'SouthernEuropean');
-      testRegex("Fa", new Chord('F', 'Major', null, null, null, null), 'SouthernEuropean');
+      testRegex("Do", makeChord('C', 'Major', null, null, null, null), 'SouthernEuropean');
+      testRegex("Re", makeChord('D', 'Major', null, null, null, null), 'SouthernEuropean');
+      testRegex("Mi", makeChord('E', 'Major', null, null, null, null), 'SouthernEuropean');
+      testRegex("Fa", makeChord('F', 'Major', null, null, null, null), 'SouthernEuropean');
     });
 
     it('transposes', function () {
 
       function testTranspose(input, num, output) {
-        parse(input).transpose(num).toJSON().should.equal(
-          parse(output).toJSON());
+        transpose(parse(input), num).should.deep.equal(parse(output));
       }
       testTranspose('G', 2, 'A');
       testTranspose('G7', 2, 'A7');
@@ -184,71 +188,71 @@ function tests() {
     });
 
     it('should pretty print', function () {
-      parse('Amaj7').prettyPrint().should.equal('Amaj7');
-      parse('AMaj7').prettyPrint().should.equal('Amaj7');
-      parse('AM7').prettyPrint().should.equal('Amaj7');
-      parse('A7').prettyPrint().should.equal('A7');
-      parse('A').prettyPrint().should.equal('A');
+      prettyPrint(parse('Amaj7')).should.equal('Amaj7');
+      prettyPrint(parse('AMaj7')).should.equal('Amaj7');
+      prettyPrint(parse('AM7')).should.equal('Amaj7');
+      prettyPrint(parse('A7')).should.equal('A7');
+      prettyPrint(parse('A')).should.equal('A');
 
-      parse('A#maj7').prettyPrint().should.equal('Bbmaj7');
-      parse('A#Maj7').prettyPrint().should.equal('Bbmaj7');
-      parse('A#M7').prettyPrint().should.equal('Bbmaj7');
-      parse('A#7').prettyPrint().should.equal('Bb7');
-      parse('A#').prettyPrint().should.equal('Bb');
+      prettyPrint(parse('A#maj7')).should.equal('Bbmaj7');
+      prettyPrint(parse('A#Maj7')).should.equal('Bbmaj7');
+      prettyPrint(parse('A#M7')).should.equal('Bbmaj7');
+      prettyPrint(parse('A#7')).should.equal('Bb7');
+      prettyPrint(parse('A#')).should.equal('Bb');
 
-      parse('Lamaj7', {naming: 'SouthernEuropean'}).prettyPrint().should.equal('Amaj7');
-      parse('LaMaj7', {naming: 'SouthernEuropean'}).prettyPrint().should.equal('Amaj7');
-      parse('LaM7', {naming: 'SouthernEuropean'}).prettyPrint().should.equal('Amaj7');
-      parse('La7', {naming: 'SouthernEuropean'}).prettyPrint().should.equal('A7');
-      parse('La', {naming: 'SouthernEuropean'}).prettyPrint().should.equal('A');
+      prettyPrint(parse('Lamaj7', {naming: 'SouthernEuropean'})).should.equal('Amaj7');
+      prettyPrint(parse('LaMaj7', {naming: 'SouthernEuropean'})).should.equal('Amaj7');
+      prettyPrint(parse('LaM7', {naming: 'SouthernEuropean'})).should.equal('Amaj7');
+      prettyPrint(parse('La7', {naming: 'SouthernEuropean'})).should.equal('A7');
+      prettyPrint(parse('La', {naming: 'SouthernEuropean'})).should.equal('A');
 
-      parse('Amaj7').prettyPrint({naming: 'SouthernEuropean'}).should.equal('Lamaj7');
-      parse('AMaj7').prettyPrint({naming: 'SouthernEuropean'}).should.equal('Lamaj7');
-      parse('AM7').prettyPrint({naming: 'SouthernEuropean'}).should.equal('Lamaj7');
-      parse('A7').prettyPrint({naming: 'SouthernEuropean'}).should.equal('La7');
-      parse('A').prettyPrint({naming: 'SouthernEuropean'}).should.equal('La');
+      prettyPrint(parse('Amaj7'), {naming: 'SouthernEuropean'}).should.equal('Lamaj7');
+      prettyPrint(parse('AMaj7'), {naming: 'SouthernEuropean'}).should.equal('Lamaj7');
+      prettyPrint(parse('AM7'), {naming: 'SouthernEuropean'}).should.equal('Lamaj7');
+      prettyPrint(parse('A7'), {naming: 'SouthernEuropean'}).should.equal('La7');
+      prettyPrint(parse('A'), {naming: 'SouthernEuropean'}).should.equal('La');
 
       // TODO: all of these defaults may change in the future, depending on
       // what we think is the most "common" representation
-      parse('Cmaj7').prettyPrint().should.equal('Cmaj7');
-      parse('C#maj7').prettyPrint().should.equal('Dbmaj7');
-      parse('Amaj7').prettyPrint().should.equal('Amaj7');
-      parse('A#maj7').prettyPrint().should.equal('Bbmaj7');
-      parse('Dmaj7').prettyPrint().should.equal('Dmaj7');
-      parse('Gmaj7').prettyPrint().should.equal('Gmaj7');
-      parse('Gadd9').prettyPrint().should.equal('Gadd9');
-      parse('Gadd11').prettyPrint().should.equal('Gadd11');
-      parse('Abadd9').prettyPrint().should.equal('Abadd9');
-      parse('Abminadd9').prettyPrint().should.equal('Abmadd9');
-      parse('Gsus4').prettyPrint().should.equal('Gsus4');
-      parse('G#sus').prettyPrint().should.equal('Absus4');
-      parse('Absus2').prettyPrint().should.equal('Absus2');
-      parse('Asus4').prettyPrint().should.equal('Asus4');
-      parse('G/F').prettyPrint().should.equal('G/F');
-      parse('G#/Bb').prettyPrint().should.equal('Ab/Bb');
-      parse('C/D').prettyPrint().should.equal('C/D');
-      parse('C7').prettyPrint().should.equal('C7');
-      parse('D#7').prettyPrint().should.equal('Eb7');
-      parse('D#maj7').prettyPrint().should.equal('Ebmaj7');
-      parse('D#m7').prettyPrint().should.equal('Ebm7');
-      parse('D#min7').prettyPrint().should.equal('Ebm7');
-      parse('D#M7').prettyPrint().should.equal('Ebmaj7');
-      parse('C').prettyPrint().should.equal('C');
-      parse('CM').prettyPrint().should.equal('C');
-      parse('Cm').prettyPrint().should.equal('Cm');
-      parse('C2').prettyPrint().should.equal('Cadd9');
-      parse('C4').prettyPrint().should.equal('Cadd11');
-      parse('C9').prettyPrint().should.equal('Cmaj9');
-      parse('C11').prettyPrint().should.equal('Cmaj11');
-      parse('C13').prettyPrint().should.equal('Cmaj13');
-      parse('Am9').prettyPrint().should.equal('Amin9');
-      parse('C6').prettyPrint().should.equal('C6');
-      parse('C5').prettyPrint().should.equal('C5');
-      parse('D5').prettyPrint().should.equal('D5');
-      parse('Eb5').prettyPrint().should.equal('Eb5');
-      parse('GMaj7').prettyPrint().should.equal('Gmaj7');
-      parse('GM7').prettyPrint().should.equal('Gmaj7');
-      parse('Gmaj7').prettyPrint().should.equal('Gmaj7');
+      prettyPrint(parse('Cmaj7')).should.equal('Cmaj7');
+      prettyPrint(parse('C#maj7')).should.equal('Dbmaj7');
+      prettyPrint(parse('Amaj7')).should.equal('Amaj7');
+      prettyPrint(parse('A#maj7')).should.equal('Bbmaj7');
+      prettyPrint(parse('Dmaj7')).should.equal('Dmaj7');
+      prettyPrint(parse('Gmaj7')).should.equal('Gmaj7');
+      prettyPrint(parse('Gadd9')).should.equal('Gadd9');
+      prettyPrint(parse('Gadd11')).should.equal('Gadd11');
+      prettyPrint(parse('Abadd9')).should.equal('Abadd9');
+      prettyPrint(parse('Abminadd9')).should.equal('Abmadd9');
+      prettyPrint(parse('Gsus4')).should.equal('Gsus4');
+      prettyPrint(parse('G#sus')).should.equal('Absus4');
+      prettyPrint(parse('Absus2')).should.equal('Absus2');
+      prettyPrint(parse('Asus4')).should.equal('Asus4');
+      prettyPrint(parse('G/F')).should.equal('G/F');
+      prettyPrint(parse('G#/Bb')).should.equal('Ab/Bb');
+      prettyPrint(parse('C/D')).should.equal('C/D');
+      prettyPrint(parse('C7')).should.equal('C7');
+      prettyPrint(parse('D#7')).should.equal('Eb7');
+      prettyPrint(parse('D#maj7')).should.equal('Ebmaj7');
+      prettyPrint(parse('D#m7')).should.equal('Ebm7');
+      prettyPrint(parse('D#min7')).should.equal('Ebm7');
+      prettyPrint(parse('D#M7')).should.equal('Ebmaj7');
+      prettyPrint(parse('C')).should.equal('C');
+      prettyPrint(parse('CM')).should.equal('C');
+      prettyPrint(parse('Cm')).should.equal('Cm');
+      prettyPrint(parse('C2')).should.equal('Cadd9');
+      prettyPrint(parse('C4')).should.equal('Cadd11');
+      prettyPrint(parse('C9')).should.equal('Cmaj9');
+      prettyPrint(parse('C11')).should.equal('Cmaj11');
+      prettyPrint(parse('C13')).should.equal('Cmaj13');
+      prettyPrint(parse('Am9')).should.equal('Amin9');
+      prettyPrint(parse('C6')).should.equal('C6');
+      prettyPrint(parse('C5')).should.equal('C5');
+      prettyPrint(parse('D5')).should.equal('D5');
+      prettyPrint(parse('Eb5')).should.equal('Eb5');
+      prettyPrint(parse('GMaj7')).should.equal('Gmaj7');
+      prettyPrint(parse('GM7')).should.equal('Gmaj7');
+      prettyPrint(parse('Gmaj7')).should.equal('Gmaj7');
 
     });
   });
