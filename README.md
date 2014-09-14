@@ -49,9 +49,9 @@ Usage
 
 #### Overview
 
-* `chordMagic.parse(string [, options])`
-* `chordMagic.transpose(chord, halfSteps)`
-* `chordMagic.prettyPrint(chord [, options])`
+* [`chordMagic.parse(string [, options])`](#chordmagicparsestring--options)
+* [`chordMagic.transpose(chord, halfSteps)`](#chordmagictransposechord-halfsteps)
+* [`chordMagic.prettyPrint(chord [, options])`](#chordmagicprettyprintchord-options)
 
 #### chordMagic.parse(string [, options])
 
@@ -183,7 +183,7 @@ The `'PowerChord'` is also known as an `'Add5'`, but I thought it was funny to c
 
 If the chord has a note that overrides the root note (e.g. `'D/F#'`, where F# overrides D), then that will be expressed here. The `overridingRoot` can be any of the 12 notes listed above for the `root`.
 
-#### `chordMagic.transpose(chord, halfSteps)`
+#### chordMagic.transpose(chord, halfSteps)
 
 Transpose the given `chord` object to a new chord by the number of `halfSteps`.
 
@@ -224,7 +224,7 @@ chordMagic.transpose(chordMagic.parse('C/G'), 3)
 // { root: 'Eb', quality: 'Major', overridingRoot: 'Bb' }
 ```
 
-#### `chordMagic.prettyPrint(chord, [options])`
+#### chordMagic.prettyPrint(chord, [options])
 
 Print a `chord` object into a nice string for display.
 
