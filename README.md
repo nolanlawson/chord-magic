@@ -121,7 +121,7 @@ The [chord quality](http://en.wikipedia.org/wiki/Major_and_minor). It will be on
 
 **extended**
 
-If the chord is [extended](http://en.wikipedia.org/wiki/Augmentation_(music), then that will be expressed here. One of:
+If the chord is [extended](http://en.wikipedia.org/wiki/Augmentation_%28music%29), then that will be expressed here. One of:
 
 ```js
 [
