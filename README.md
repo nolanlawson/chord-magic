@@ -63,7 +63,7 @@ Parse a string with the given `options`. Returns either a structured object desc
 
 - `'English'` (A-B-C-D-E-F-G)
 - `'NorthernEuropean'` (A-B-H-C-C#-D-D#-E-F-F#-G)
-- `'SouthernEuropean'` (Do-Re-Mi-Fa-So-La-Ti-Do and variants).
+- `'SouthernEuropean'` (Do-Re-Mi-Fa-So-La-Ti-Do, and variants like Ré and Sol).
 
 If no naming is specified, then `'English'` is the default.
 
@@ -109,7 +109,7 @@ The root note of the chord. It will be one of:
 [ 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab' ]
 ```
 
-Note that is value is always in English format, regardless of the format when you parsed it. Also, flats are always expressed, never sharps (e.g. always `'Bb'`, never `'A#'`). The goal here is that you never have to do the disambiguation yourself.
+Note that this value is always in English format, regardless of the format when you parsed it. Also, flats are always expressed, never sharps (e.g. always `'Bb'`, never `'A#'`). The goal here is that you never have to do the disambiguation yourself.
 
 **quality** *(required)*
 
@@ -121,7 +121,7 @@ The [chord quality](http://en.wikipedia.org/wiki/Major_and_minor). It will be on
 
 **extended**
 
-If the chord is [extended](http://en.wikipedia.org/wiki/Augmentation_(music)), then that will be expressed here. One of:
+If the chord is [extended](http://en.wikipedia.org/wiki/Augmentation_(music), then that will be expressed here. One of:
 
 ```js
 [
