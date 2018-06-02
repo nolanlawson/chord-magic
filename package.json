@@ -1,6 +1,6 @@
 {
   "name": "chord-magic",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Musical chord parser, transposer, and disambiguator",
   "main": "dist/chord-magic.cjs.js",
   "module": "dist/chord-magic.es.js",
