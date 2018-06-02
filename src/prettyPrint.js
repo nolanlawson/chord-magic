@@ -1,4 +1,3 @@
-
 import { noteNamings } from './noteNamings'
 import { chordQualities } from './chordQualities'
 import { chordExtendeds } from './chordExtendeds'

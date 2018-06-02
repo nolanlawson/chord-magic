@@ -1,4 +1,3 @@
-
 const English = {}
 English['A'] = ['A']
 English['Bb'] = ['Bb', 'A#', 'Asharp', 'Bflat']

@@ -1,4 +1,3 @@
-
 import { chordRoots } from './chordRoots'
 
 function transposeNote (note, num) {

@@ -1,8 +1,10 @@
 import buble from 'rollup-plugin-buble'
 
 export default {
-  entry: 'src/index.js',
-  moduleName: 'chordMagic',
+  input: 'src/index.js',
+  output: {
+    name: 'chordMagic'
+  },
   plugins: [
     buble()
   ]

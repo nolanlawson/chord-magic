@@ -6,26 +6,26 @@ import { chordExtendeds } from './chordExtendeds'
 import { chordAddeds } from './chordAddeds.js'
 import { chordSuspendeds } from './chordSuspendeds'
 
-const rootLookups = {}
+export const rootLookups = {}
 
 Object.keys(noteNamings).forEach(function (noteNaming) {
   rootLookups[noteNaming] = {}
   addReverseLookups(rootLookups[noteNaming], noteNamings[noteNaming])
 })
 
-let chordQualitiesLookups = {}
+export const chordQualitiesLookups = {}
 
 addReverseLookups(chordQualitiesLookups, chordQualities)
 
-let chordExtendedsLookups = {}
+export const chordExtendedsLookups = {}
 
 addReverseLookupsForExtendeds(chordExtendedsLookups, chordExtendeds)
 
-let chordSuspendedsLookups = {}
+export const chordSuspendedsLookups = {}
 
 addReverseLookups(chordSuspendedsLookups, chordSuspendeds)
 
-let chordAddedsLookups = {}
+export const chordAddedsLookups = {}
 
 addReverseLookups(chordAddedsLookups, chordAddeds)
 
@@ -52,12 +52,4 @@ function addReverseLookupsForExtendeds (reverseDict, dict) {
       }
     })
   })
-}
-
-export const reverseLookups = {
-  roots: rootLookups,
-  qualities: chordQualitiesLookups,
-  extendeds: chordExtendedsLookups,
-  addeds: chordAddedsLookups,
-  suspendeds: chordSuspendedsLookups
 }

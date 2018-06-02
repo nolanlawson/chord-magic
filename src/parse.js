@@ -1,6 +1,11 @@
-
 import { chordRegexes } from './chordRegexes'
-import { reverseLookups } from './reverseLookups'
+import {
+  rootLookups,
+  chordExtendedsLookups,
+  chordQualitiesLookups,
+  chordAddedsLookups,
+  chordSuspendedsLookups
+} from './reverseLookups'
 
 function parseObject (match, noteNaming) {
   // match objects is 6 elements:
@@ -9,27 +14,27 @@ function parseObject (match, noteNaming) {
 
   let res = {}
 
-  res.root = reverseLookups.roots[noteNaming][match[1]]
+  res.root = rootLookups[noteNaming][match[1]]
 
-  let foundExtended = reverseLookups.extendeds[match[2]]
+  let foundExtended = chordExtendedsLookups[match[2]]
   if (foundExtended) {
     res.quality = foundExtended.quality
     res.extended = foundExtended.extended
   } else { // normal quality without extended
-    res.quality = reverseLookups.qualities[match[2]]
+    res.quality = chordQualitiesLookups[match[2]]
   }
 
   if (match[3]) {
-    res.added = reverseLookups.addeds[match[3]]
+    res.added = chordAddedsLookups[match[3]]
   }
 
   if (match[4]) {
-    res.suspended = reverseLookups.suspendeds[match[4]]
+    res.suspended = chordSuspendedsLookups[match[4]]
   }
 
   if (match[5]) {
     // substring(1) to cut off the slash, because it's e.g. "/F"
-    res.overridingRoot = reverseLookups.roots[noteNaming][match[5].substring(1)]
+    res.overridingRoot = rootLookups[noteNaming][match[5].substring(1)]
   }
 
   return res
@@ -42,4 +47,4 @@ export function parse (str, opts) {
   let match = str.match(chordRegexes[noteNaming].pattern)
 
   return match && parseObject(match, noteNaming)
-};
+}

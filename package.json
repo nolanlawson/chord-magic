@@ -51,7 +51,6 @@
     "uglify-js": "^2.4.13"
   },
   "dependencies": {},
-  "sideEffects": false,
   "standard": {
     "ignore": [
       "dist"

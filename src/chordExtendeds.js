@@ -16,5 +16,4 @@ export const chordExtendeds = {
 
   // TODO: I don't know what this one is - can't find it on wikipedia
   Minor9: ['Minor', ['min9', 'm9', 'minor9']]
-
 }
