@@ -1,7 +1,7 @@
 export const chordExtendeds = {
   // sevenths
   Major7: ['Major', ['maj7', 'Maj7', 'M7', '+7']],
-  Minor7: ['Minor', ['m7', 'Min7', 'min7', 'minor7']],
+  Minor7: ['Minor', ['m7', 'Min7', 'min7', 'minor7', '-7']],
   Dominant7: ['Major', ['7', 'dom7', 'dominant7']],
   Diminished7: ['Diminished', ['dim7', 'diminished7']],
 

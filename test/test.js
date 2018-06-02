@@ -44,6 +44,7 @@ function tests () {
       testRegex('D#maj7', makeChord('Eb', 'Major', 'Major7', null, null, null))
       testRegex('D#m7', makeChord('Eb', 'Minor', 'Minor7', null, null, null))
       testRegex('D#min7', makeChord('Eb', 'Minor', 'Minor7', null, null, null))
+      testRegex('D#-7', makeChord('Eb', 'Minor', 'Minor7', null, null, null))
       testRegex('D#M7', makeChord('Eb', 'Major', 'Major7', null, null, null))
 
       testRegex('C', makeChord('C', 'Major', null, null, null, null))
