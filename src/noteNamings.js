@@ -8,7 +8,7 @@ const English = {
   Eb: ['Eb', 'D#', 'Eflat', 'Dsharp'],
   E: ['E'],
   F: ['F'],
-  Gb: ['Gb', 'F#', 'Gflat', 'Gsharp'],
+  Gb: ['Gb', 'F#', 'Gflat', 'Fsharp'],
   G: ['G'],
   Ab: ['Ab', 'G#', 'Aflat', 'Gsharp']
 }
@@ -23,7 +23,7 @@ const NorthernEuropean = {
   Eb: ['Eb', 'D#', 'Eflat', 'Dsharp'],
   E: ['E'],
   F: ['F'],
-  Gb: ['Gb', 'F#', 'Gflat', 'Gsharp'],
+  Gb: ['Gb', 'F#', 'Gflat', 'Fsharp'],
   G: ['G'],
   Ab: ['Ab', 'G#', 'Aflat', 'Gsharp']
 }

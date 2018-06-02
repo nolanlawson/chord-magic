@@ -16,8 +16,8 @@ function tests () {
     'D#7', 'D#maj7', 'D#m7', 'D#min7', 'D#M7', 'C', 'CM', 'Cm', 'C2', 'C4', 'C9', 'C11', 'C13',
     'Am9', 'C6', 'C5', 'D5', 'Eb5', 'GMaj7', 'GM7', 'Gmaj7']
 
-  describe('basic tests', function () {
-    it('should pass the original java tests', function () {
+  describe('test suite', function () {
+    it('basic tests', function () {
       testRegex('Cmaj7', makeChord('C', 'Major', 'Major7', null, null, null))
       testRegex('C#maj7', makeChord('Db', 'Major', 'Major7', null, null, null))
       testRegex('Amaj7', makeChord('A', 'Major', 'Major7', null, null, null))
@@ -68,6 +68,9 @@ function tests () {
       testRegex('GMaj7', makeChord('G', 'Major', 'Major7', null, null, null))
       testRegex('GM7', makeChord('G', 'Major', 'Major7', null, null, null))
       testRegex('Gmaj7', makeChord('G', 'Major', 'Major7', null, null, null))
+
+      testRegex('Fsharp', makeChord('Gb', 'Major', null, null, null, null))
+      testRegex('Gsharp', makeChord('Ab', 'Major', null, null, null, null))
     })
 
     it('should be commutative', function () {
