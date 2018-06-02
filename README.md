@@ -1,48 +1,60 @@
-Chord Magic [![Build Status](https://travis-ci.org/nolanlawson/chord-magic.svg)](https://travis-ci.org/nolanlawson/chord-magic)
+Chord Magic [![Build Status](https://travis-ci.org/nolanlawson/chord-magic.svg)](https://travis-ci.org/nolanlawson/chord-magic) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 ==========
 
 Chord Magic is a parser, disambiguator, transposer, and pretty-printer for musical chords. It runs in Node.js and the browser.
 
+Parse a chord:
+
 ```js
-// parse a chord
-var chord = chordMagic.parse('A7');
+var chord = chordMagic.parse('A7'); // { root: 'A', quality: 'Major', extended: 'Dominant7' }
+```
 
-console.log(chord); // { root: 'A', quality: 'Major', extended: 'Dominant7' }
+Transpose it up 3 half-steps:
 
-// transpose it up 3 half-steps
-chord = chordMagic.transpose(chord, 3);
+```js
+chord = chordMagic.transpose(chord, 3); // { root: 'C', quality: 'Major', extended: 'Dominant7' }
+```
 
-console.log(chord); // { root: 'C', quality: 'Major', extended: 'Dominant7' }
-  
-// pretty-print
+Pretty-print it:  
+
+```js
 chordMagic.prettyPrint(chord); // 'C7'
+```
 
-// pretty-print in Do-Re-Mi format
+Pretty-print it in Do-Re-Mi format:
+
+```js
 chordMagic.prettyPrint(chord, {naming: 'SouthernEuropean'}); // 'Do7'
 ```
 
 Install
 ------
 
-#### In Node.js
+Install with npm:
 
 ```bash
 npm install chord-magic
 ```
 
+Then `require()` it:
+
 ```js
 var chordMagic = require('chord-magic')
 ```
 
-#### In the browser
+ES modules are also supported:
 
-Use `browserify` or just take the browser builds from the `dist` directory, which will simply give you a `window.chordMagic` object.
-
-This thing is also in Bower:
-
-```bash
-bower install chord-magic
+```js
+import { transpose } from 'chord-magic'
 ```
+
+You can also use a script tag:
+
+```html
+<script src="https://unpkg.com/chord-magic/dist/chord-magic.min.js"></script>
+```
+
+This exposes a global `chordMagic` object.
 
 Usage
 --------
@@ -229,14 +241,14 @@ Currently this will just choose a single representation for each note (e.g. alwa
 Build this project
 -------
 
-    $ npm run build
+    npm run build
 
 
 Test this project
 -------
 
-    $ npm run test
+    npm run test
 
 Or to check code coverage:
 
-    $ npm run coverage
+    npm run coverage
