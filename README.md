@@ -215,7 +215,13 @@ chordMagic.transpose(chordMagic.parse('C/G'), 3)
 
 Print a `chord` object into a nice string for display.
 
-`options` takes only a single option, `naming`, as described above (i.e. `'English'` (default), `'NorthernEuropean'`, or `'SouthernEuropean'`).
+`options` takes only a single option, `naming`, which supports some default built-in naming schemes:
+
+- `English` (default)
+- `NorthernEuropean` (contains H)
+- `SouthernEuropean` ("Do Re Mi" format)
+
+Or custom naming (described below).
 
 Examples:
 
@@ -236,7 +242,35 @@ chordMagic.prettyPrint(chordMagic.parse('Cmaj7'))
 // 'Cmaj7'
 ```
 
-Currently this will just choose a single representation for each note (e.g. always `'Bb'` and never `'A#'`) as well as a single common representation for every other attribute (e.g. always `'m7'`, never `'min7'`, `'minor7'`, etc.).
+By default this will choose a single representation for each note (e.g. always `'Bb'` and never `'A#'`) as well as a single common representation for every other attribute (e.g. always `'m7'`, never `'min7'`, `'minor7'`, etc.).
+
+If you would like to customize the note names (e.g. to show sharps instead of flats), then you can pass an array of the 12 notes starting with A as the `naming` member. For instance:
+
+```js
+var sharpsOnly = [
+  'A',
+  'A#',
+  'B',
+  'C',
+  'C#',
+  'D',
+  'D#',
+  'E',
+  'F',
+  'F#',
+  'G',
+  'G#'
+]
+
+chordMagic.prettyPrint(chordMagic.parse('Bb'), {naming: sharpsOnly})
+// 'A#'
+
+chordMagic.prettyPrint(chordMagic.parse('Bb'), {naming: sharpsOnly})
+// 'A#'
+
+chordMagic.prettyPrint(chordMagic.parse('D/Gb'), {naming: sharpsOnly})
+// 'D/F#'
+```
 
 Build this project
 -------
