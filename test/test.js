@@ -219,6 +219,74 @@ function tests () {
       expect(() => transpose('A')).to.throw()
       expect(() => transpose('J', 1)).to.throw()
     })
+
+    it('should allow custom namings - flats', function () {
+      let flatsOnly = [
+        'A',
+        'Bb',
+        'B',
+        'C',
+        'Db',
+        'D',
+        'Eb',
+        'E',
+        'F',
+        'Gb',
+        'G',
+        'Ab'
+      ]
+
+      chordMagic.prettyPrint(chordMagic.parse('A'), {naming: flatsOnly}).should.equal('A')
+      chordMagic.prettyPrint(chordMagic.parse('A#'), {naming: flatsOnly}).should.equal('Bb')
+      chordMagic.prettyPrint(chordMagic.parse('Bb'), {naming: flatsOnly}).should.equal('Bb')
+      chordMagic.prettyPrint(chordMagic.parse('C'), {naming: flatsOnly}).should.equal('C')
+      chordMagic.prettyPrint(chordMagic.parse('C#'), {naming: flatsOnly}).should.equal('Db')
+      chordMagic.prettyPrint(chordMagic.parse('D'), {naming: flatsOnly}).should.equal('D')
+      chordMagic.prettyPrint(chordMagic.parse('Eb'), {naming: flatsOnly}).should.equal('Eb')
+      chordMagic.prettyPrint(chordMagic.parse('F'), {naming: flatsOnly}).should.equal('F')
+      chordMagic.prettyPrint(chordMagic.parse('F#'), {naming: flatsOnly}).should.equal('Gb')
+      chordMagic.prettyPrint(chordMagic.parse('G'), {naming: flatsOnly}).should.equal('G')
+      chordMagic.prettyPrint(chordMagic.parse('G#'), {naming: flatsOnly}).should.equal('Ab')
+      chordMagic.prettyPrint(chordMagic.parse('Ab'), {naming: flatsOnly}).should.equal('Ab')
+
+      chordMagic.prettyPrint(chordMagic.parse('D/F#'), {naming: flatsOnly}).should.equal('D/Gb')
+      chordMagic.prettyPrint(chordMagic.parse('C#/Ab'), {naming: flatsOnly}).should.equal('Db/Ab')
+      chordMagic.prettyPrint(chordMagic.parse('F#/C#'), {naming: flatsOnly}).should.equal('Gb/Db')
+    })
+
+    it('should allow custom namings - sharps', function () {
+      let sharpsOnly = [
+        'A',
+        'A#',
+        'B',
+        'C',
+        'C#',
+        'D',
+        'D#',
+        'E',
+        'F',
+        'F#',
+        'G',
+        'G#'
+      ]
+
+      chordMagic.prettyPrint(chordMagic.parse('A'), {naming: sharpsOnly}).should.equal('A')
+      chordMagic.prettyPrint(chordMagic.parse('A#'), {naming: sharpsOnly}).should.equal('A#')
+      chordMagic.prettyPrint(chordMagic.parse('Bb'), {naming: sharpsOnly}).should.equal('A#')
+      chordMagic.prettyPrint(chordMagic.parse('C'), {naming: sharpsOnly}).should.equal('C')
+      chordMagic.prettyPrint(chordMagic.parse('C#'), {naming: sharpsOnly}).should.equal('C#')
+      chordMagic.prettyPrint(chordMagic.parse('D'), {naming: sharpsOnly}).should.equal('D')
+      chordMagic.prettyPrint(chordMagic.parse('Eb'), {naming: sharpsOnly}).should.equal('D#')
+      chordMagic.prettyPrint(chordMagic.parse('F'), {naming: sharpsOnly}).should.equal('F')
+      chordMagic.prettyPrint(chordMagic.parse('F#'), {naming: sharpsOnly}).should.equal('F#')
+      chordMagic.prettyPrint(chordMagic.parse('G'), {naming: sharpsOnly}).should.equal('G')
+      chordMagic.prettyPrint(chordMagic.parse('G#'), {naming: sharpsOnly}).should.equal('G#')
+      chordMagic.prettyPrint(chordMagic.parse('Ab'), {naming: sharpsOnly}).should.equal('G#')
+
+      chordMagic.prettyPrint(chordMagic.parse('D/F#'), {naming: sharpsOnly}).should.equal('D/F#')
+      chordMagic.prettyPrint(chordMagic.parse('C#/Ab'), {naming: sharpsOnly}).should.equal('C#/G#')
+      chordMagic.prettyPrint(chordMagic.parse('F#/C#'), {naming: sharpsOnly}).should.equal('F#/C#')
+    })
   })
 }
 
