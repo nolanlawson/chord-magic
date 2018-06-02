@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = [
+export const chordRoots = [
   'A',
   'Bb',
   'B',
@@ -13,4 +11,4 @@ module.exports = [
   'Gb',
   'G',
   'Ab'
-];
+]
