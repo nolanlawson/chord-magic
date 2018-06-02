@@ -26,6 +26,7 @@
     "test-node": "istanbul test ./node_modules/mocha/bin/_mocha test/test.js",
     "coverage": "npm test --coverage && istanbul check-coverage --lines 95 --function 95 --statements 95 --branches 95",
     "clean": "rimraf dist && mkdirp dist",
+    "prepublish": "npm run build",
     "build": "run-s clean build-js min",
     "build-js": "run-p build-es build-cjs build-umd",
     "build-es": "rollup  -c -f es  -o dist/chord-magic.es.js",
