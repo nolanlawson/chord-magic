@@ -36,6 +36,13 @@ function parseObject (match, noteNaming) {
     // substring(1) to cut off the slash, because it's e.g. "/F"
     res.overridingRoot = rootLookups[noteNaming][match[5].substring(1)]
   }
+  
+  let notParsable = match && match.input;
+  for (var i = 0; i < 6; i++) {
+    notParsable = notParsable.replace(match[i], "");
+  }
+
+  if(notParsable) {res.notParsable = notParsable}
 
   return res
 }
